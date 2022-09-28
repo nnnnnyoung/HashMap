@@ -51,6 +51,14 @@ public class WordManager {
 		String b=in.nextLine();
 		System.out.println("단어의 중요도를 상중하로 입력하세요");
 		String c=in.nextLine();
+		for(;;) {
+			if(c.equals("상")||c.equals("중")||c.equals("하")) {
+				break;
+			}else {
+				System.out.println("난이도를 상 중 하로 입력하세요");
+				c=in.nextLine();
+			}
+		}
 		temp.mean=b;
 		temp.level=c;
 		W.input(a,temp);

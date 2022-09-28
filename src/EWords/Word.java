@@ -52,19 +52,44 @@ public class Word {
 	public void mod() {
 		System.out.println("수정할 단어를 입력하세요");
 		String a=in.nextLine();
-		if(Word.get(a)==null){
+		if(Word.containsKey(a) ){
+			System.out.println("무엇을 수정할까요?");
+			System.out.println("1. 단어수정");
+			System.out.println("2. 뜻 수정");
+			System.out.println("3. 난이도 수정");
+			int no=in.nextInt();
+			in.nextLine();
+			if(no==1) {
+				wordMean temp = new wordMean();
+				temp.mean=Word.get(a).mean;
+				temp.level=Word.get(a).level;
+				Word.remove(a);
+				System.out.println(a+"을(를) 무엇으로 수정할까요?");
+				String newWord=in.nextLine();
+				Word.put(newWord, temp);
+			}else if(no==2) {
+				System.out.println(a+"의 뜻을 무엇으로 수정할까요?");
+				String newMean=in.nextLine();
+				Word.get(a).mean=newMean;
+			}else if(no==3) {
+				System.out.println(a+"의 난이도를 무엇으로 수정할까요?");
+				String newLevel=in.nextLine();
+				for(;;) {
+					if(newLevel.equals("상")||newLevel.equals("중")||newLevel.equals("하")) {
+						Word.get(a).level=newLevel;
+						break;
+					}else {
+						System.out.println("난이도를 상 중 하로 입력하세요");
+						newLevel=in.nextLine();
+					}
+				}
+			}
+			System.out.println("수정완료");
+		}else {
 			System.out.println("수정할 단어가 없습니다.");
 			return;
 		}
-		System.out.println(a+"의 뜻을 무엇으로 수정할까요?");
-		String b=in.nextLine();
-		System.out.println(a+"의 난이도를 무엇으로 수정할까요?");
-		String c=in.nextLine();
-		wordMean temp = new wordMean();
-		temp.mean=b;
-		temp.level=c;
-		Word.put(a, temp);
-		System.out.println("수정완료");
+		
 	}
 	
 	public void search(String a) {
